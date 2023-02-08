@@ -10,6 +10,20 @@ app.listen(port, () => {
 // set template engine
 app.set("view engine","hbs");// you can use ejs, pub
 
+// staticPath
+const templatePath = path.join(__dirname,'../templates');
+app.set("views",templatePath);
+
+app.get("/about",(req,res)=>{
+    res.render('about',{aboutVar:"Suryakant"}); //pointing to templates->about.hbs 
+})
+
 app.get("",(req,res)=>{
-    res.render("index",{channelName:"Surya"}); // pointing to views->index.hbs 
+    res.render("index",{channelName:"Surya"}); // pointing to templates->index.hbs 
 });
+
+
+/* create partials */
+const hbs = require('hbs');
+const partialPath = path.join(__dirname,'../templates/partials');
+hbs.registerPartials(partialPath);
